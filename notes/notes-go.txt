@@ -3,3 +3,5 @@ $ go mod init first-example
 $ go run .
 
 $ go test .
+
+$ go test -v .
