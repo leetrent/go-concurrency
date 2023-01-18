@@ -5,3 +5,7 @@ $ go run .
 $ go test .
 
 $ go test -v .
+
+$ go mod init example2
+
+$ go run -race .
