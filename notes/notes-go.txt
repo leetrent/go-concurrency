@@ -9,3 +9,7 @@ $ go test -v .
 $ go mod init example2
 
 $ go run -race .
+
+$ go test -race .
+
+$ set PATH=C:\TDM-GCC-64\bin\;%PATH%

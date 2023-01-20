@@ -8,22 +8,38 @@ import (
 var msg string
 var wg sync.WaitGroup
 
-func updateMessage(s string, m *sync.Mutex) {
-	defer wg.Done()
+// func updateMessage(s string, m *sync.Mutex) {
+// 	defer wg.Done()
 
-	m.Lock()
+// 	m.Lock()
+// 	msg = s
+// 	m.Unlock()
+// }
+
+func updateMessage(s string) {
+	defer wg.Done()
 	msg = s
-	m.Unlock()
 }
+
+// func main() {
+// 	msg = "Hello,world!"
+
+// 	var mutex sync.Mutex
+
+// 	wg.Add(2)
+// 	go updateMessage("Hello, universe!", &mutex)
+// 	go updateMessage("Hello, cosmos!", &mutex)
+// 	wg.Wait()
+
+// 	fmt.Println(msg)
+// }
 
 func main() {
 	msg = "Hello,world!"
 
-	var mutex sync.Mutex
-
 	wg.Add(2)
-	go updateMessage("Hello, universe!", &mutex)
-	go updateMessage("Hello, cosmos!", &mutex)
+	go updateMessage("Hello, universe!")
+	go updateMessage("Hello, cosmos!")
 	wg.Wait()
 
 	fmt.Println(msg)
