@@ -120,29 +120,29 @@ func diningProblem(philosopher Philosopher, wg *sync.WaitGroup, forks map[int]*s
 		// Lock both forks
 		if philosopher.leftFork > philosopher.rightFork {
 			forks[philosopher.rightFork].Lock()
-			fmt.Printf("\t[%d]: %s takes the right fork.\n", ii, philosopher.name)
+			fmt.Printf("\t[%d]: %s takes the right fork #%d.\n", ii, philosopher.name, philosopher.rightFork)
 			forks[philosopher.leftFork].Lock()
-			fmt.Printf("\t[%d]: %s takes the left fork.\n", ii, philosopher.name)
+			fmt.Printf("\t[%d]: %s takes the left fork #%d.\n", ii, philosopher.name, philosopher.leftFork)
 		} else {
 			forks[philosopher.leftFork].Lock()
-			fmt.Printf("\t[%d]: %s takes the left fork.\n", ii, philosopher.name)
+			fmt.Printf("\t[%d]: %s takes the left fork #%d.\n", ii, philosopher.name, philosopher.leftFork)
 			forks[philosopher.rightFork].Lock()
-			fmt.Printf("\t[%d]: %s takes the right fork.\n", ii, philosopher.name)
+			fmt.Printf("\t[%d]: %s takes the right fork #%d.\n", ii, philosopher.name, philosopher.rightFork)
 		}
 
 		// By the time we get to this line, the philosopher has a lock (mutex) on both forks.
-		fmt.Printf("\t[%d]: %s has both forks and is eating..\n", ii, philosopher.name)
+		fmt.Printf("\t[%d]: %s has both forks (L:%d R:%d) and is eating..\n", ii, philosopher.name, philosopher.leftFork, philosopher.rightFork)
 		time.Sleep(eatTime)
 
 		// The philosopher starts to think, but does not drop the forks yet.
-		fmt.Printf("\t[%d]: %s is thinking.\n", ii, philosopher.name)
+		fmt.Printf("\t[%d]: %s is thinking (L:%d R:%d).\n", ii, philosopher.name, philosopher.leftFork, philosopher.rightFork)
 		time.Sleep(thinkTime)
 
 		// Unlock the mutexes for both forks.
 		forks[philosopher.leftFork].Unlock()
 		forks[philosopher.rightFork].Unlock()
 
-		fmt.Printf("\t[%d]: %s put down the forks.\n", ii, philosopher.name)
+		fmt.Printf("\t[%d]: %s put down the forks (L:%d R:%d).\n", ii, philosopher.name, philosopher.leftFork, philosopher.rightFork)
 	}
 
 	// The philosopher has finished eating, so print out a message.
