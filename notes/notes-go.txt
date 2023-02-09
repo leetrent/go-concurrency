@@ -13,3 +13,5 @@ $ go run -race .
 $ go test -race .
 
 $ set PATH=C:\TDM-GCC-64\bin\;%PATH%
+
+$ go get github.com/fatih/color
