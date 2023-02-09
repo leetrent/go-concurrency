@@ -61,9 +61,12 @@ func main() {
 
 	// Print the response to the console.
 	// fmt.Println("All done. Closing channels.")
-	close(ping)
-	close(pong)
 
+	// Causes data race condition
+	// close(ping)
+	// close(pong)
+
+	// Causes: panic: send on closed channel
 	// close(pong)
 	// close(ping)
 }
